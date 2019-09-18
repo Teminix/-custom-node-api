@@ -10,3 +10,12 @@ const Lib = {
   }
 }
 module.exports = Lib
+
+const {Cursor} = require("mongodb")
+Cursor.prototype.toDocs = async function(){
+  let array = [];
+  while(await this.hasNext()){
+    array.push(await this.next())
+  }
+  return array
+}
